@@ -8,6 +8,10 @@
             setTimeout(function () { $(element).fadeOut('slow').fadeIn('slow'); }, 500);
             setTimeout(function () { $(element).css('background-color', '#FF6A00'); }, 500);
         }
+         function onOut(event) {
+            let target = event.target;
+            target.style.backgroundColor = '#3CB44B';
+        }
     </script>
 
 <div class="container" style="background-color:lightgray">
@@ -15,12 +19,14 @@
         <div class="row">
             @foreach (var column in Model.Columns)
             {
+                string cssClass = string.Empty;
                 <div class="col">
                          
-
+                        
                         @foreach (var locker in column.Lockers)
                         {
-                            <div class="row" id="@locker.Name" style="background-color:#3CB44B;border-color:white;border-width:thin;margin: 2px 2px 2px 2px;" onclick="onClick(this)">
+                            cssClass = "size" + locker.Size.ToString();
+                            <div class="row @cssClass" style="background-color:#3CB44B;border-color:white;border-width:thin;margin: 2px 2px 2px 2px;" onclick="onClick(this)" onmouseout="onOut(event)">
 
                                 @locker.Name
 
